@@ -15,12 +15,28 @@ class Forms extends React.Component{
         event.preventDefault();
         const searchQuery = event.target.name.value;
         const URL = `http://localhost:3001/getCity?cityName=${searchQuery}`;
-        const serverRes = await axios.get(URL);
-        console.log(serverRes.data);
+        // const serverRes = await axios.get(URL);
+        // console.log(serverRes.data);
 
-        this.setState({
-            arr: serverRes.data
+        // this.setState({
+        //     arr: serverRes.data
+        // })
+
+
+        axios
+        .get(URL)
+        .then(result =>{
+            this.setState({
+                arr: result.data
+            })
         })
+        .catch(error =>{
+            console.log(error);
+        })
+
+
+
+
     }
 
 

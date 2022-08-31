@@ -33,21 +33,43 @@ async function getCityHandler(req,res){
     // console.log(URL);
 
 
-try
-{
-    let apiResult = await axios.get(URL);
-    // res.send(apiResult.data);
-    let cityArray = apiResult.data.data.map(item =>{
-        // return item;
-        // console.log(item.valid_date);
+// try
+// {
+//     let apiResult = await axios.get(URL);
+//     // res.send(apiResult.data);
+//     let cityArray = apiResult.data.data.map(item =>{
+//         // return item;
+//         // console.log(item.valid_date);
+//         return new Weather(item);
+//         res.send(item);
+//     })
+//     res.send(cityArray);
+// }
+// catch{
+
+// }
+
+
+axios
+.get(URL)
+.then(result =>{
+    //do
+    
+    let cityArray = result.data.data.map(item =>{
         return new Weather(item);
-        res.send(item);
     })
     res.send(cityArray);
-}
-catch{
+})
+.catch(error=>{
+    res.send(error);
+})
 
-}
+
+
+
+
+
+
 }
 
 class Weather {
