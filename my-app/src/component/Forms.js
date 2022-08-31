@@ -19,29 +19,20 @@ class Forms extends React.Component{
         event.preventDefault();
         const searchQuery = event.target.name.value;
         const URL = `http://localhost:3001/getCity?cityName=${searchQuery}`;
-        // const serverRes = await axios.get(URL);
-        // console.log(serverRes.data);
-
-        // this.setState({
-        //     arr: serverRes.data
-        // })
+       
         const url = `http://localhost:3001/movie?cityName=${searchQuery}`
-
 
         axios
         .get(url)
         .then(result =>{
             this.setState({
-                m: JSON.stringify(result.data)
+                m:JSON.stringify(result.data)
             })
+            console.log(result.data)
         })
         .catch(error =>{
             console.log(error);
         })
-
-
-
-
 
         axios
         .get(URL)
@@ -53,10 +44,6 @@ class Forms extends React.Component{
         .catch(error =>{
             console.log(error);
         })
-
-
-
-
     }
 
 
@@ -95,21 +82,14 @@ class Forms extends React.Component{
     )
 })
 }
+
       <h1>Movie: {this.state.m}</h1>
       </>
     )
-    
   }
 }
 
 
-
-
-
-
-        
-       
-      
     
 export default Forms;
 

@@ -29,7 +29,7 @@ server.get('/movie',getMovieHandler);
 
 function getMovieHandler(req,res){
     const searchM = req.query.searchQuery;
-    const url = `https://api.themoviedb.org/3/movie/550?query=${searchM}api_key=${process.env.key2}`;
+    const url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.key2}&query=${searchM}`;
 
 
     axios
@@ -37,7 +37,7 @@ function getMovieHandler(req,res){
     .then(result =>{
         //do
         
-        let movieArray = result.data.map(item =>{
+        let movieArray = result.data.results.map(item =>{
             return item;
         })
         res.send(movieArray);
@@ -45,17 +45,8 @@ function getMovieHandler(req,res){
     .catch(error=>{
         res.send(error);
     })
-    
-
-
-
-
-
-
 
 }
-
-
 
 
 
@@ -73,22 +64,6 @@ async function getCityHandler(req,res){
     // console.log(URL);
 
 
-// try
-// {
-//     let apiResult = await axios.get(URL);
-//     // res.send(apiResult.data);
-//     let cityArray = apiResult.data.data.map(item =>{
-//         // return item;
-//         // console.log(item.valid_date);
-//         return new Weather(item);
-//         res.send(item);
-//     })
-//     res.send(cityArray);
-// }
-// catch{
-
-// }
-
 
 axios
 .get(URL)
@@ -103,11 +78,6 @@ axios
 .catch(error=>{
     res.send(error);
 })
-
-
-
-
-
 
 
 }
