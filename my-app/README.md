@@ -68,3 +68,27 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+### today i will connect the backfront with two api one weather api and the another is the movie api
+
+### Project Name: weather and movie
+### Author: ahmad yaghi Version: 1.0.0
+
+# Overview
+## it will show a description about the forcacst of the city that the users enter for 16 days
+
+### Getting Started
+### we have to use the react app and connected to the server and the server will be connected to a weather api and movie api so today we worked on frontend and backend and weather and movie api
+
+### Architecture
+### english language, to show forcast and date
+
+### Change Log
+#### Name of feature: backend creating and connecting it to the weather and movie api
+#### Estimate of time needed to complete: 2 hours
+#### Start time: 9:40
+#### Finish time: 2:00
+#### Actual time needed to complete: 4 hours
+#### Credit and Collaborations
+#### only we have to connect react app and connected to our server then the server will be connected to the weather and the movie api

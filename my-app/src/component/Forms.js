@@ -1,5 +1,8 @@
 import axios from 'axios';
 import React from 'react';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Card from 'react-bootstrap/Card';
 
 
 class Forms extends React.Component{
@@ -16,29 +19,20 @@ class Forms extends React.Component{
         event.preventDefault();
         const searchQuery = event.target.name.value;
         const URL = `http://localhost:3001/getCity?cityName=${searchQuery}`;
-        // const serverRes = await axios.get(URL);
-        // console.log(serverRes.data);
-
-        // this.setState({
-        //     arr: serverRes.data
-        // })
+       
         const url = `http://localhost:3001/movie?cityName=${searchQuery}`
-
 
         axios
         .get(url)
         .then(result =>{
             this.setState({
-                m: JSON.stringify(result.data)
+                m:JSON.stringify(result.data)
             })
+            console.log(result.data)
         })
         .catch(error =>{
             console.log(error);
         })
-
-
-
-
 
         axios
         .get(URL)
@@ -50,46 +44,53 @@ class Forms extends React.Component{
         .catch(error =>{
             console.log(error);
         })
-
-
-
-
     }
 
 
 
   render(){
     return(
-        <>
-        <h1>welcome to movie Weather website</h1>
-        <form onSubmit={this.getMovie}>
-            <input type='text' name='name' placeholder='enter your favourite movie' />
-            <button type='submit'>Search</button>
-        </form>
 
-        {
-            this.state.arr.map( (item, index)=> {
-                return(
-                    
-                    <div>
-                        <h3>Day {index +1} :</h3>
-                        <h4>Description: {item.des}</h4>
-                        <h4>Date: {item.date}</h4>
-                        <br>
-                        </br>
-                        <br></br>
-                       
-                    </div>
-                )
-            })
-        }
-         <h1>Movie: {this.state.m}</h1>
-        </>
-      
+<>
+    <Form onSubmit={this.getMovie}>
+      <Form.Group className="mb-3" controlId="cityName">
+        <Form.Label>City Name</Form.Label>
+        <Form.Control input type='text' name='name' placeholder='enter city name' />
+      </Form.Group>
+      <Button variant="primary" type="submit">
+        Search
+      </Button>
+    </Form>
+    <br></br>
+    <br></br>
+    {this.state.arr.map( (item, index)=> {
+    return(
+        <div>
+        <Card style={{ width: '100rem' }}>
+      <Card.Body>
+        <Card.Title>Day {index +1}</Card.Title>
+        <Card.Text>
+        Description: {item.des}
+        </Card.Text>
+        <Card.Text>
+        Date: {item.date}
+        </Card.Text>
+      </Card.Body>
+    </Card>
+           
+        </div>
+    )
+})
+}
+
+      <h1>Movie: {this.state.m}</h1>
+      </>
     )
   }
 }
 
+
+    
 export default Forms;
 
 
