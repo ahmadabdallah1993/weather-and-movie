@@ -1,5 +1,8 @@
 'use strict';
 
+let getCity = require('./Weather')
+let getMovie = require('./Movie');
+
 const express = require('express');
 const server = express();
 
@@ -8,7 +11,7 @@ server.use(cors());
 
 require('dotenv').config();
 
-const axios = require('axios');
+// const axios = require('axios');
 
 
 const PORT = process.env.PORT || 3001; 
@@ -25,28 +28,9 @@ server.get('/',(req,res)=>{
 
 
 // http://localhost:3001/movie?cityName=amman
-server.get('/movie',getMovieHandler);
-
-function getMovieHandler(req,res){
-    const searchM = req.query.searchQuery;
-    const url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.key2}&query=${searchM}`;
+server.get('/movie',getMovie);
 
 
-    axios
-    .get(url)
-    .then(result =>{
-        //do
-        
-        let movieArray = result.data.results.map(item =>{
-            return item;
-        })
-        res.send(movieArray);
-    })
-    .catch(error=>{
-        res.send(error);
-    })
-
-}
 
 
 
@@ -55,39 +39,9 @@ function getMovieHandler(req,res){
 
 
 
-server.get('/getCity',getCityHandler);
-
-async function getCityHandler(req,res){
-    const searchQ = req.query.cityName;
-    // console.log(searchQ);
-    const URL = `https://api.weatherbit.io/v2.0/forecast/daily?city=${searchQ},NC&key=${process.env.key}`;
-    // console.log(URL);
+server.get('/getCity',getCity);
 
 
-
-axios
-.get(URL)
-.then(result =>{
-    //do
-    
-    let cityArray = result.data.data.map(item =>{
-        return new Weather(item);
-    })
-    res.send(cityArray);
-})
-.catch(error=>{
-    res.send(error);
-})
-
-
-}
-
-class Weather {
-    constructor(item){
-        this.des = JSON.stringify(item.weather.description);
-        this.date = item.valid_date;
-    }
-}
 
 server.listen(PORT,()=>{
   console.log(`i am listening on port ${PORT}`);
