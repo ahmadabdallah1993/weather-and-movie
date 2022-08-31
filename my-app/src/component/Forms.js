@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 
 
@@ -10,9 +11,16 @@ class Forms extends React.Component{
         }
     }
 
-    getMovie = (event) => {
+    getMovie = async (event) => {
         event.preventDefault();
-        // const searchQuery = event.target.name.value;
+        const searchQuery = event.target.name.value;
+        const URL = `http://localhost:3001/getCity?cityName=${searchQuery}`;
+        const serverRes = await axios.get(URL);
+        console.log(serverRes.data);
+
+        this.setState({
+            arr: serverRes.data
+        })
     }
 
 
@@ -25,6 +33,22 @@ class Forms extends React.Component{
             <input type='text' name='name' placeholder='enter your favourite movie' />
             <button type='submit'>Search</button>
         </form>
+
+        {
+            this.state.arr.map( (item, index)=> {
+                return(
+                    
+                    <div>
+                        <h3>Day {index +1} :</h3>
+                        <h4>Description: {item.des}</h4>
+                        <h4>Date: {item.date}</h4>
+                        <br>
+                        </br>
+                        <br></br>
+                    </div>
+                )
+            })
+        }
         </>
       
     )

@@ -38,10 +38,10 @@ try
     let apiResult = await axios.get(URL);
     // res.send(apiResult.data);
     let cityArray = apiResult.data.data.map(item =>{
-        
+        // return item;
         // console.log(item.valid_date);
         return new Weather(item);
-        // res.send(item);
+        res.send(item);
     })
     res.send(cityArray);
 }
@@ -52,7 +52,7 @@ catch{
 
 class Weather {
     constructor(item){
-        this.description = item;
+        this.des = JSON.stringify(item.weather.description);
         this.date = item.valid_date;
     }
 }
