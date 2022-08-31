@@ -7,7 +7,8 @@ class Forms extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            arr:[]
+            arr:[],
+            m: ''
         }
     }
 
@@ -21,6 +22,22 @@ class Forms extends React.Component{
         // this.setState({
         //     arr: serverRes.data
         // })
+        const url = `http://localhost:3001/movie?cityName=${searchQuery}`
+
+
+        axios
+        .get(url)
+        .then(result =>{
+            this.setState({
+                m: JSON.stringify(result.data)
+            })
+        })
+        .catch(error =>{
+            console.log(error);
+        })
+
+
+
 
 
         axios
@@ -61,10 +78,12 @@ class Forms extends React.Component{
                         <br>
                         </br>
                         <br></br>
+                       
                     </div>
                 )
             })
         }
+         <h1>Movie: {this.state.m}</h1>
         </>
       
     )

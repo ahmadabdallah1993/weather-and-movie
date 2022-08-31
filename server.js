@@ -21,8 +21,48 @@ server.get('/',(req,res)=>{
 })
 
 
+// https://api.themoviedb.org/3/movie/550?api_key=516a315cbe724b34d8db26e97561e390
+
+
+// http://localhost:3001/movie?cityName=amman
+server.get('/movie',getMovieHandler);
+
+function getMovieHandler(req,res){
+    const searchM = req.query.searchQuery;
+    const url = `https://api.themoviedb.org/3/movie/550?query=${searchM}api_key=${process.env.key2}`;
+
+
+    axios
+    .get(url)
+    .then(result =>{
+        //do
+        
+        let movieArray = result.data.map(item =>{
+            return item;
+        })
+        res.send(movieArray);
+    })
+    .catch(error=>{
+        res.send(error);
+    })
+    
+
+
+
+
+
+
+
+}
+
+
+
+
+
 
 // http://localhost:3001/getCity?cityName=amman
+
+
 
 server.get('/getCity',getCityHandler);
 
